@@ -1,0 +1,14 @@
+{
+  "name": "profile-card-website",
+  "version": "1.0.0",
+  "description": "Responsive profile card website.",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --open=index.html"
+  },
+  "author": "Oloruntoba Komolafe",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
