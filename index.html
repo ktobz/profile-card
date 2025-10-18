@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Profile Card</title>
+  <style>
+    :root {
+      --bg: #eaf0fb;
+      --card-bg: #fff;
+      --primary: #0077cc;
+      --text-main: #222;
+      --text-sub: #666;
+      --border-radius: 18px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.10);
+      --max-width: 480px;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      width: 100vw;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    article[data-testid="profile-card"] {
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      border-radius: var(--border-radius);
+      width: 100vw;
+      min-height: 100vh;
+      max-width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    @media (min-width: 700px) {
+      article[data-testid="profile-card"] {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0;
+        max-width: 900px;
+        width: 95vw;
+      }
+    }
+    .profile-left {
+      width: 100%;
+      max-width: var(--max-width);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 1rem 1rem;
+      background: #f7faff;
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+      box-sizing: border-box;
+    }
+    figure.avatar-figure {
+      margin: 0;
+      text-align: center;
+      width: 100%;
+      max-width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #cfd8dc;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      transition: transform 0.3s;
+      display: block;
+      background: #fff;
+    }
+    figcaption {
+      margin-top: 0.7rem;
+      font-size: 1rem;
+      color: var(--text-sub);
+      text-align: center;
+      word-break: break-word;
+    }
+    .upload-controls {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      width: 100%;
+    }
+    label.upload-btn {
+      background: var(--primary);
+      color: white;
+      padding: 7px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+      width: fit-content;
+    }
+    label.upload-btn:hover {
+      background: #005fa3;
+    }
+    input[type="file"],
+    input[type="url"] {
+      display: none;
+    }
+    .url-input {
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      padding: 7px 10px;
+      width: 100%;
+      max-width: 210px;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+    .profile-right {
+      flex: 1;
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 2rem 1rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-sizing: border-box;
+    }
+    header[aria-label="profile-name"] {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      word-break: break-word;
+      text-align: left;
+      width: 100%;
+    }
+    .bio {
+      font-size: 1.08rem;
+      color: var(--text-sub);
+      margin-bottom: 0.5rem;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: normal;
+      display: block;
+    }
+    .time {
+      font-size: 0.98rem;
+      color: #888;
+      margin-bottom: 1.2rem;
+      width: 100%;
+    }
+    nav.social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 1.2rem;
+      align-items: center;
+    }
+    nav.social-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.08rem;
+      transition: color 0.3s;
+      word-break: break-word;
+    }
+    nav.social-links a:hover {
+      color: #005fa3;
+      text-decoration: underline;
+    }
+    section.lists {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    @media (min-width: 600px) {
+      section.lists {
+        flex-direction: row;
+        gap: 2rem;
+      }
+    }
+    .list-block {
+      background: #f6f8fa;
+      border-radius: 10px;
+      padding: 1rem;
+      flex: 1;
+      min-width: 0;
+      box-sizing: border-box;
+      word-break: break-word;
+    }
+    .list-title {
+      font-weight: bold;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      font-size: 1.08rem;
+      word-break: break-word;
+    }
+    ul {
+      list-style: disc inside;
+      padding-left: 0;
+      margin: 0;
+      word-break: break-word;
+    }
+    li {
+      background: #fff;
+      margin-bottom: 7px;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 1rem;
+      border: 1px solid #e3e8ee;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+    li:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <article data-testid="profile-card">
+    <section class="profile-left">
+      <figure class="avatar-figure">
+        <img src="https://via.placeholder.com/150" alt="Profile Avatar" id="profileImg" class="avatar" data-testid="profile-image">
+        <figcaption></figcaption>
+      </figure>
+      <div class="upload-controls">
+        <label for="imageUpload" class="upload-btn" data-testid="upload-label">Upload Image</label>
+        <input type="file" id="imageUpload" accept="image/*" data-testid="image-upload">
+        <input type="url" id="imageUrlInput" class="url-input" placeholder="or paste image URL..." data-testid="url-input">
+      </div>
+    </section>
+    <section class="profile-right">
+      <header aria-label="profile-name" data-testid="profile-name">Oloruntoba Komolafe</header>
+      <p class="bio" id="profileBio" data-testid="profile-bio">
+        Aspiring frontend web developer, with a focus on project completion. Passionate about building accessible, responsive interfaces and learning new technologies. Always eager to collaborate and solve real-world problems.
+      </p>
+      <p class="time" id="currentTime" data-testid="current-time"></p>
+      <nav class="social-links" data-testid="social-links" aria-label="social media links">
+        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M22.46 6c-.77.35-1.6.59-2.47.7a4.3 4.3 0 0 0 1.88-2.37 8.59 8.59 0 0 1-2.72 1.04A4.28 4.28 0 0 0 16.11 4c-2.37 0-4.29 1.92-4.29 4.29 0 .34.04.67.11.99A12.13 12.13 0 0 1 3.15 5.13a4.29 4.29 0 0 0 1.33 5.72c-.7-.02-1.36-.21-1.94-.53v.05c0 2.01 1.43 3.69 3.33 4.07-.35.1-.72.16-1.1.16-.27 0-.53-.03-.78-.07.53 1.65 2.07 2.85 3.89 2.88A8.6 8.6 0 0 1 2 19.54a12.13 12.13 0 0 0 6.56 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.19 0-.38-.01-.57A8.7 8.7 0 0 0 24 4.59a8.56 8.56 0 0 1-2.54.7z" fill="#0077cc"/></svg>
+          Twitter
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.25c-.97 0-1.75-.78-1.75-1.75s.78-1.75 1.75-1.75 1.75.78 1.75 1.75-.78 1.75-1.75 1.75zm13.5 11.25h-3v-5.5c0-1.1-.9-2-2-2s-2 .9-2 2v5.5h-3v-10h3v1.5c.41-.77 1.39-1.5 2.5-1.5 1.93 0 3.5 1.57 3.5 3.5v6.5z" fill="#0077cc"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.263.82-.582 0-.288-.01-1.05-.015-2.06-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.76-1.606-2.665-.304-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 3.003-.404c1.02.005 2.05.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.803 5.624-5.475 5.92.43.37.813 1.102.813 2.222 0 1.606-.014 2.903-.014 3.297 0 .322.218.699.825.58C20.565 21.796 24 17.297 24 12c0-6.63-5.37-12-12-12z" fill="#0077cc"/></svg>
+          GitHub
+        </a>
+      </nav>
+      <section class="lists">
+        <section class="list-block" aria-labelledby="hobbies-title">
+          <p class="list-title" id="hobbies-title">Hobbies</p>
+          <ul data-testid="hobbies-list">
+            <li>Coding</li>
+            <li>Reading</li>
+            <li>Tennis</li>
+          </ul>
+        </section>
+        <section class="list-block" aria-labelledby="dislikes-title">
+          <p class="list-title" id="dislikes-title">Dislikes</p>
+          <ul data-testid="dislikes-list">
+            <li>Bad Roads</li>
+            <li>Boredom</li>
+            <li>Heat</li>
+          </ul>
+        </section>
+      </section>
+    </section>
+  </article>
+  <script>
+    // Display current time dynamically
+    function updateTime() {
+      const timeEl = document.getElementById("currentTime");
+      const now = new Date();
+      timeEl.textContent = `Current Time: ${now.toLocaleTimeString()}`;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Handle avatar upload
+    const imageUpload = document.getElementById("imageUpload");
+    const imageUrlInput = document.getElementById("imageUrlInput");
+    const profileImg = document.getElementById("profileImg");
+
+    imageUpload.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          profileImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    imageUrlInput.addEventListener("change", (event) => {
+      const url = event.target.value.trim();
+      if (url) {
+        profileImg.src = url;
+      }
+    });
+  </script>
+</body>
+</html>
