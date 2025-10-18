@@ -4,7 +4,8 @@
   "description": "Responsive profile card website.",
   "main": "index.html",
   "scripts": {
-    "start": "live-server --open=index.html"
+    "start": "live-server --open=index.html",
+    "build": "echo \"No build required for this static site\""
   },
   "author": "Oloruntoba Komolafe",
   "license": "MIT",
