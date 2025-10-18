@@ -67,9 +67,10 @@
       flex-direction: column;
       align-items: center;
       padding: 2rem 1rem 1rem 1rem;
-      background: #f7faff;
+      background: transparent;
       border-radius: var(--border-radius) 0 0 var(--border-radius);
       box-sizing: border-box;
+      position: relative;
     }
     figure.avatar-figure {
       margin: 0;
@@ -79,6 +80,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      flex-shrink: 0;
+      flex-grow: 0;
+      background: rgba(255,255,255,0.5); /* transparent card effect */
+      border-radius: 18px;
+      padding: 16px 0 8px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+      height: auto; /* Restore auto height */
     }
     .avatar {
       width: 90px;
@@ -87,9 +97,10 @@
       object-fit: cover;
       border: 2px solid #cfd8dc;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-      transition: transform 0.3s;
       display: block;
       background: #fff;
+      position: relative;
+      z-index: 1;
     }
     figcaption {
       margin-top: 0.7rem;
@@ -99,39 +110,10 @@
       word-break: break-word;
     }
     .upload-controls {
-      margin-top: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.95rem;
-      width: 100%;
-    }
-    label.upload-btn {
-      background: var(--primary);
-      color: white;
-      padding: 7px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background 0.3s;
-      width: fit-content;
-    }
-    label.upload-btn:hover {
-      background: #005fa3;
-    }
-    input[type="file"],
-    input[type="url"] {
       display: none;
     }
     .url-input {
-      border: 1px solid #bbb;
-      border-radius: 6px;
-      padding: 7px 10px;
-      width: 100%;
-      max-width: 210px;
-      font-size: 0.95rem;
-      box-sizing: border-box;
+      display: none;
     }
     .profile-right {
       flex: 1;
@@ -244,14 +226,9 @@
   <article data-testid="profile-card">
     <section class="profile-left">
       <figure class="avatar-figure">
-        <img src="https://via.placeholder.com/150" alt="Profile Avatar" id="profileImg" class="avatar" data-testid="profile-image">
+        <img src="IMG_6015.PNG" alt="Profile Avatar" id="profileImg" class="avatar" data-testid="profile-image">
         <figcaption></figcaption>
       </figure>
-      <div class="upload-controls">
-        <label for="imageUpload" class="upload-btn" data-testid="upload-label">Upload Image</label>
-        <input type="file" id="imageUpload" accept="image/*" data-testid="image-upload">
-        <input type="url" id="imageUrlInput" class="url-input" placeholder="or paste image URL..." data-testid="url-input">
-      </div>
     </section>
     <section class="profile-right">
       <header aria-label="profile-name" data-testid="profile-name">Oloruntoba Komolafe</header>
@@ -308,23 +285,7 @@
     const imageUrlInput = document.getElementById("imageUrlInput");
     const profileImg = document.getElementById("profileImg");
 
-    imageUpload.addEventListener("change", (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          profileImg.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    imageUrlInput.addEventListener("change", (event) => {
-      const url = event.target.value.trim();
-      if (url) {
-        profileImg.src = url;
-      }
-    });
+    // Upload controls removed from DOM, so no upload logic needed
   </script>
 </body>
 </html>
