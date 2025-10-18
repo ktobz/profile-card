@@ -7,7 +7,7 @@ This project allows users to upload a profile image, display bio details, social
 
 ## 🌐 Live Demo
 
-**Netlify Live URL:** _[Add your deployed Netlify link here]_  
+**Netlify Live URL:** _[https://tobacard.netlify.app/]_  
 **GitHub Repository:** [https://github.com/ktobz/profile-card](https://github.com/ktobz/profile-card)
 
 ---
